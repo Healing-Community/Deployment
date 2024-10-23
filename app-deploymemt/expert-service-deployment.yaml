@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expert-service-deployment
+  labels:
+    app: expert-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expert-service
+  template:
+    metadata:
+      labels:
+        app: expert-service
+    spec:
+      containers:
+      - name: expert-service
+        image: healingcommunity/expert-service:latest
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health/liveness
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /health/readiness
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expert-service-lb
+spec:
+  selector:
+    app: expert-service
+  ports:
+    - protocol: TCP
+      port: 8083
+      targetPort: 8080
+  type: LoadBalancer
