@@ -17,29 +17,29 @@ data:
       - job_name: 'user-service'
         metrics_path: /metrics
         static_configs:
-          - targets: ['user-service-lb:8080']
+          - targets: ['user-service.default.svc.cluster.local:8080']
 
       - job_name: 'quizz-service'
         metrics_path: /metrics
         static_configs:
-          - targets: ['quizz-service-lb:8081']
+          - targets: ['quizz-service.default.svc.cluster.local:8080']
       
       - job_name: 'post-service'
         metrics_path: /metrics
         static_configs:
-          - targets: ['post-service-lb:8082']
+          - targets: ['post-service.default.svc.cluster.local:8080']
 
       - job_name: 'expert-service'
         metrics_path: /metrics
         static_configs:
-          - targets: ['expert-service-lb:8083']
+          - targets: ['expert-service.default.svc.cluster.local:8080']
       
       - job_name: 'report-service'
         metrics_path: /metrics
         static_configs:
-          - targets: ['report-service-lb:8084']
+          - targets: ['report-service.default.svc.cluster.local:8080']
       
       - job_name: 'notification-service'
         metrics_path: /metrics
         static_configs:
-          - targets: ['notification-service-lb:8085']
+          - targets: ['notification-service.default.svc.cluster.local:8080']
