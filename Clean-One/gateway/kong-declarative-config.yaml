@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: kong
+  name: kong-declarative-config
+data:
+  kong.yml: |
+    _format_version: "3.0"
+    services:
+      - name: example-service
+        url: http://example.com
+        routes:
+          - name: example-route
+            paths:
+              - /
+      - name: user-service
+        url: http://user-service.default.svc.cluster.local:8080
+        routes:
+          - name: user-route
+            paths:
+              - /user
+      - name : report-service
+        url: http://report-service.report-service.svc.cluster.local:8080
+        routes:
+          - name: report-route
+            paths:
+              - /report
+      - name: quizz-service
+        url: http://quizz-service.default.svc.cluster.local:8080
+        routes:
+          - name: quizz-route
+            paths:
+              - /quizz
+      - name: expert-service
+        url: http://expert-service.default.svc.cluster.local:8080
+        routes:
+          - name: expert-route
+            paths:
+              - /expert
+      - name: post-service
+        url: http://post-service.default.svc.cluster.local:8080
+        routes:
+          - name: post-route
+            paths:
+              - /post
+      - name: notification-service
+        url: http://notification-service.default.svc.cluster.local:8080
+        routes:
+          - name: notification-route
+            paths:
+              - /notification
