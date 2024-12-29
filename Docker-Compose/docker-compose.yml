@@ -31,7 +31,6 @@ services:
     container_name: payment-service
     ports:
       - "83:8080"  # API exposed at port 83
-      - "5005:5005"  # gRPC exposed at port 50
     networks:
       - app-network
   # 5
