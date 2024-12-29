@@ -1,0 +1,95 @@
+version: '1.0'
+services:
+  # 1
+  user-service:
+    image: healingcommunity/user-service:latest
+    container_name: user-service
+    ports:
+      - "80:8080" # API exposed at port 80
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+  # 2
+  group-service:
+    image: healingcommunity/group-service:latest
+    container_name: group-service
+    ports:
+      - "81:8080"  # API exposed at port 81
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+  # 3
+  post-service:
+    image: healingcommunity/post-service:latest
+    container_name: post-service
+    ports:
+      - "82:8080"  # API exposed at port 82
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+  # 4
+  payment-service:
+    image: healingcommunity/payment-service:latest
+    container_name: payment-service
+    ports:
+      - "83:8080"  # API exposed at port 83
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+  # 5
+  notification-service:
+    image: healingcommunity/notification-service:latest
+    container_name: notification-service
+    ports:
+      - "84:8080"  # API exposed at port 84
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+  # 6
+  chat-service:
+    image: healingcommunity/chat-service:latest
+    container_name: chat-service
+    ports:
+      - "85:8080"  # API exposed at port 85
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+  # 7
+  expert-service:
+    image: healingcommunity/expert-service:latest
+    container_name: expert-service
+    ports:
+      - "86:8080"  # API exposed at port 86
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+  # 8
+  detector-service:
+    image: healingcommunity/detector-service:latest
+    container_name: detector-service
+    ports:
+      - "5000:5000"  # API exposed at port 87
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+  # 9
+  quiz-service:
+    image: healingcommunity/quiz-service:latest
+    container_name: quiz-service
+    ports:
+      - "88:8080"  # API exposed at port 88
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+  # 10
+  report-service:
+    image: healingcommunity/report-service:latest
+    container_name: report-service
+    ports:
+      - "89:8080"  # API exposed at port 89
+      # - "50:5005"  # gRPC exposed at port 50
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
