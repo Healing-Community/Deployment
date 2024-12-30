@@ -93,6 +93,100 @@ services:
       - "5672:5672"  # RabbitMQ exposed at port 5672
     networks:
       - app-network
+  
+
+  kong-database:
+    image: postgres:latest
+    restart: unless-stopped
+    networks:
+      - app-network
+    environment:
+      POSTGRES_USER: kong
+      POSTGRES_DB: kong
+      POSTGRES_PASSWORD: kongpass
+    ports:
+      - "5432:5432"
+
+  kong-migration:
+    image: kong:latest
+    command: kong migrations bootstrap
+    depends_on:
+      - kong-database
+    networks:
+      - app-network
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: kong-database
+      KONG_PG_PASSWORD: kongpass
+    restart: on-failure
+
+  kong-gateway:
+    image: kong:latest
+    restart: unless-stopped
+    networks:
+      - app-network
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: kong-database
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kongpass
+      KONG_PROXY_ACCESS_LOG: "/dev/stdout"
+      KONG_ADMIN_ACCESS_LOG: "/dev/stdout"
+      KONG_PROXY_ERROR_LOG: "/dev/stderr"
+      KONG_ADMIN_ERROR_LOG: "/dev/stderr"
+      KONG_ADMIN_LISTEN: "0.0.0.0:8001, 0.0.0.0:8444 ssl"
+      KONG_ADMIN_GUI_URL: "http://localhost:8002"
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "8001:8001"
+      - "8002:8002"
+      - "8444:8444"
+    depends_on:
+      - kong-migration
+      - kong-database
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+# Initialize Kong with some services and routes
+  kong-init:
+    image: curlimages/curl:latest
+    command: >
+      sh -c "
+        sleep 10 &&
+        curl -i -X POST http://kong-gateway:8001/services --data name=user-service --data url=http://user-service:8080 &&
+        curl -i -X POST http://kong-gateway:8001/services/user-service/routes --data paths[]=/user &&
+
+        curl -i -X POST http://kong-gateway:8001/services --data name=group-service --data url=http://group-service:8080 &&
+        curl -i -X POST http://kong-gateway:8001/services/group-service/routes --data paths[]=/group &&
+
+        curl -i -X POST http://kong-gateway:8001/services --data name=post-service --data url=http://post-service:8080 &&
+        curl -i -X POST http://kong-gateway:8001/services/post-service/routes --data paths[]=/post &&
+
+        curl -i -X POST http://kong-gateway:8001/services --data name=payment-service --data url=http://payment-service:8080 &&
+        curl -i -X POST http://kong-gateway:8001/services/payment-service/routes --data paths[]=/payment &&
+        
+        curl -i -X POST http://kong-gateway:8001/services --data name=notification-service --data url=http://notification-service:8080 &&
+        curl -i -X POST http://kong-gateway:8001/services/notification-service/routes --data paths[]=/notification &&
+        
+        curl -i -X POST http://kong-gateway:8001/services --data name=chat-service --data url=http://chat-service:8080 &&
+        curl -i -X POST http://kong-gateway:8001/services/chat-service/routes --data paths[]=/chat &&
+        
+        curl -i -X POST http://kong-gateway:8001/services --data name=expert-service --data url=http://expert-service:8080 &&
+        curl -i -X POST http://kong-gateway:8001/services/expert-service/routes --data paths[]=/expert &&
+        
+        curl -i -X POST http://kong-gateway:8001/services --data name=detector-service --data url=http://detector-service:5000 &&
+        curl -i -X POST http://kong-gateway:8001/services/detector-service/routes --data paths[]=/detector &&
+        
+        curl -i -X POST http://kong-gateway:8001/services --data name=quiz-service --data url=http://quiz-service:8080 &&
+        curl -i -X POST http://kong-gateway:8001/services/quiz-service/routes --data paths[]=/quiz &&
+        
+        curl -i -X POST http://kong-gateway:8001/services --data name=report-service --data url=http://report-service:8080 &&
+        curl -i -X POST http://kong-gateway:8001/services/report-service/routes --data paths[]=/report
+      "
+    depends_on:
+      - kong-gateway
+    networks:
+      - app-network
 networks:
   app-network:
     driver: bridge
