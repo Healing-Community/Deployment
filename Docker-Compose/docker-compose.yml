@@ -84,6 +84,15 @@ services:
       - "89:8080"  # API exposed at port 89
     networks:
       - app-network
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "15672:15672"  # RabbitMQ exposed at port 15672
+      - "5672:5672"  # RabbitMQ exposed at port 5672
+    networks:
+      - app-network
 networks:
   app-network:
     driver: bridge
