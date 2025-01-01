@@ -6,6 +6,7 @@ services:
     container_name: user-service
     ports:
       - "80:8080" # API exposed at port 80
+      - "5007:5005"
     networks:
       - app-network
   # 2
@@ -14,7 +15,7 @@ services:
     container_name: group-service
     ports:
       - "81:8080"  # API exposed at port 81
-      - "6005:5005"  # gRPC exposed at port 50
+      - "5006:5005"  # gRPC exposed at port 50
     networks:
       - app-network
   # 3
