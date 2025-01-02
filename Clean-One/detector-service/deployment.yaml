@@ -1,26 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: user-service
-  name: user-service
+  name: detector-service
+  namespace: detector-service
   labels:
-    app: user-service
+    app: detector-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: detector-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: detector-service
     spec:
       containers:
-        - name: user-service
-          image: healingcommunity/user-service:latest
+        - name: detector-service
+          image: healingcommunity/detector-service:latest
           ports:
-            - containerPort: 8080
-            - containerPort: 5005
+            - containerPort: 5000
           resources:
             requests:
               memory: "128Mi"

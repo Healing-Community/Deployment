@@ -14,7 +14,7 @@ data:
             paths:
               - /
       - name: user-service
-        url: http://user-service.default.svc.cluster.local:8080
+        url: http://user-service.user-service.svc.cluster.local:8080
         routes:
           - name: user-route
             paths:
@@ -25,14 +25,14 @@ data:
           - name: report-route
             paths:
               - /report
-      - name: quizz-service
-        url: http://quizz-service.default.svc.cluster.local:8080
+      - name: quiz-service
+        url: http://quiz-service.quiz-service.svc.cluster.local:8080
         routes:
           - name: quizz-route
             paths:
               - /quizz
       - name: expert-service
-        url: http://expert-service.default.svc.cluster.local:8080
+        url: http://expert-service.expert-service.svc.cluster.local:8080
         routes:
           - name: expert-route
             paths:
@@ -49,3 +49,9 @@ data:
           - name: notification-route
             paths:
               - /notification
+      - name: detector-service
+        url: http://detector-service.detector-service.svc.cluster.local:5000
+        routes:
+          - name: detector-route
+            paths:
+              - /detector

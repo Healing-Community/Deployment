@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: user-service
-  name: user-service
+  name: quiz-service
+  namespace: quiz-service
   labels:
-    app: user-service
+    app: quiz-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: quiz-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: quiz-service
     spec:
       containers:
-        - name: user-service
-          image: healingcommunity/user-service:latest
+        - name: quiz-service
+          image: healingcommunity/quiz-service:latest
           ports:
             - containerPort: 8080
             - containerPort: 5005

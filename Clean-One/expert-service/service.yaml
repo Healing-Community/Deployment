@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
-  namespace: user-service
+  name: expert-service
+  namespace: expert-service
 spec:
   selector:
-    app: user-service
+    app: expert-service
   ports:
     - name: http
       protocol: TCP

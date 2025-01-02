@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
-  namespace: user-service
+  name: post-service
+  namespace: post-service
 spec:
   selector:
-    app: user-service
+    app: post-service
   ports:
     - name: http
       protocol: TCP

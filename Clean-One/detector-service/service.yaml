@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: detector-service
+  namespace: detector-service
+spec:
+  selector:
+    app: detector-service
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP

@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: user-service
-  name: user-service
+  name: payment-service
+  namespace: payment-service
   labels:
-    app: user-service
+    app: payment-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: payment-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: payment-service
     spec:
       containers:
-        - name: user-service
-          image: healingcommunity/user-service:latest
+        - name: payment-service
+          image: healingcommunity/payment-service:latest
           ports:
             - containerPort: 8080
             - containerPort: 5005
