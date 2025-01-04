@@ -1,26 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: post-service
-  namespace: post-service
+  name: group-service
+  namespace: group-service
   labels:
-    app: post-service
+    app: group-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: post-service
+      app: group-service
   template:
     metadata:
       labels:
-        app: post-service
+        app: group-service
     spec:
       containers:
-        - name: post-service
-          image: healingcommunity/post-service:latest
+        - name: group-service
+          image: healingcommunity/group-service:latest
           ports:
             - containerPort: 8080
             - containerPort: 5005
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/appsettings.json
+              subPath: appsettings.json
           resources:
             requests:
               memory: "128Mi"
@@ -28,3 +32,7 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "300m"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: appsetting-config

@@ -28,9 +28,9 @@ data:
       - name: quiz-service
         url: http://quiz-service.quiz-service.svc.cluster.local:8080
         routes:
-          - name: quizz-route
+          - name: quiz-route
             paths:
-              - /quizz
+              - /quiz
       - name: expert-service
         url: http://expert-service.expert-service.svc.cluster.local:8080
         routes:
@@ -38,13 +38,13 @@ data:
             paths:
               - /expert
       - name: post-service
-        url: http://post-service.default.svc.cluster.local:8080
+        url: http://post-service.post-service.svc.cluster.local:8080
         routes:
           - name: post-route
             paths:
               - /post
       - name: notification-service
-        url: http://notification-service.default.svc.cluster.local:8080
+        url: http://notification-service.notification-service.svc.cluster.local:8080
         routes:
           - name: notification-route
             paths:
@@ -55,3 +55,21 @@ data:
           - name: detector-route
             paths:
               - /detector
+      - name: group-service
+        url: http://group-service.group-service.svc.cluster.local:8080
+        routes:
+          - name: group-route
+            paths:
+              - /group  
+      - name: payment-service
+        url: http://payment-service.payment-service.svc.cluster.local:8080
+        routes:
+          - name: payment-route
+            paths:
+              - /payment  
+      - name : chat-service
+        url: http://chat-service.chat-service.svc.cluster.local:8080
+        routes:
+          - name: chat-route
+            paths:
+              - /chat 

@@ -1,15 +1,15 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: chat-service-hpa
-  namespace: chat-service
+  name: hook-service-hpa
+  namespace: hook-service
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: chat-service
+    name: hook-service
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 10
   metrics:
     - type: Resource
       resource:

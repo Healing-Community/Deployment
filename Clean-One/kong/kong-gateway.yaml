@@ -41,7 +41,7 @@ spec:
               value: "0.0.0.0:8001, 0.0.0.0:8444 ssl"
             # Đổi IP này thành IP của máy bạn hoăc IP của LoadBalancer
             - name: KONG_ADMIN_GUI_URL
-              value: "http://localhost:8002"
+              value: "http://34.45.122.186:8002"
           volumeMounts:
             - name: kong-config
               mountPath: /etc/kong/kong.yml

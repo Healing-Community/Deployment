@@ -18,6 +18,10 @@ spec:
       containers:
         - name: user-service
           image: healingcommunity/user-service:latest
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/appsettings.json
+              subPath: appsettings.json
           ports:
             - containerPort: 8080
             - containerPort: 5005
@@ -28,3 +32,7 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "300m"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: appsetting-config

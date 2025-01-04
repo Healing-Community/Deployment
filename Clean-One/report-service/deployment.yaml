@@ -6,7 +6,7 @@ metadata:
   labels:
     app: report-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: report-service
@@ -32,6 +32,10 @@ spec:
           #     port: 8080
           #   initialDelaySeconds: 5
           #   periodSeconds: 10
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/appsettings.json
+              subPath: appsettings.json
           resources:
             requests:
               memory: "128Mi"
@@ -39,3 +43,7 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "300m"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: appsetting-config

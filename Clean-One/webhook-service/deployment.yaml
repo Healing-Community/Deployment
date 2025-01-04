@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quiz-service
-  namespace: quiz-service
+  namespace: hook-service
+  name: hook-service
   labels:
-    app: quiz-service
+    app: hook-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: quiz-service
+      app: hook-service
   template:
     metadata:
       labels:
-        app: quiz-service
+        app: hook-service
     spec:
       containers:
-        - name: quiz-service
-          image: healingcommunity/quiz-service:latest
-          ports:
-            - containerPort: 8080
-            - containerPort: 5005
+        - name: hook-service
+          image: healingcommunity/hook-service:latest
           volumeMounts:
             - name: config-volume
               mountPath: /app/appsettings.json
               subPath: appsettings.json
+          ports:
+            - containerPort: 8080
+      
           resources:
             requests:
               memory: "128Mi"
