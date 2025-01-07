@@ -24,6 +24,13 @@ spec:
             - containerPort: 8001
             - containerPort: 8002
             - containerPort: 8444
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu : "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "100m"
           env:
             - name: KONG_DATABASE
               value: "off"
@@ -39,9 +46,10 @@ spec:
               value: "/dev/stderr"
             - name: KONG_ADMIN_LISTEN
               value: "0.0.0.0:8001, 0.0.0.0:8444 ssl"
+              
             # Đổi IP này thành IP của máy bạn hoăc IP của LoadBalancer
             - name: KONG_ADMIN_GUI_URL
-              value: "http://34.45.122.186:8002"
+              value: "http://34.41.134.139:8002"
           volumeMounts:
             - name: kong-config
               mountPath: /etc/kong/kong.yml

@@ -42,8 +42,7 @@ data:
         "PAYOS_CHECKSUM_KEY": "4b5acef38ea3a8fa7f2bb41f666f6b67f67cd20477b4c9dfa435b2f957148d9e"
       },
       "CallbackUrls": {
-        "Host": "http://kong.kong.svc.cluster.local",
-        "Port": "8000"
+        "Host": "http://34.41.134.139:8000", // Ip của kong gateway
       },
       "ExpertServiceUrl": "http://expert-service.expert-service.svc.cluster.local:5005",
       "UserServiceUrl": "http://user-service.user-service.svc.cluster.local:5005",
