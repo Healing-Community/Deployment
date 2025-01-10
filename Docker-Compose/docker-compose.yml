@@ -1,4 +1,4 @@
-version: '1.0'
+version: "1.0"
 services:
   # 1
   user-service:
@@ -14,8 +14,8 @@ services:
     image: healingcommunity/group-service:latest
     container_name: group-service
     ports:
-      - "81:8080"  # API exposed at port 81
-      - "5006:5005"  # gRPC exposed at port 50
+      - "81:8080" # API exposed at port 81
+      - "5006:5005" # gRPC exposed at port 50
     networks:
       - app-network
   # 3
@@ -23,7 +23,7 @@ services:
     image: healingcommunity/post-service:latest
     container_name: post-service
     ports:
-      - "82:8080"  # API exposed at port 82
+      - "82:8080" # API exposed at port 82
     networks:
       - app-network
   # 4
@@ -31,8 +31,8 @@ services:
     image: healingcommunity/payment-service:latest
     container_name: payment-service
     ports:
-      - "83:8080"  # API exposed at port 83
-      - "5008:5005"  # gRPC exposed at port 50
+      - "83:8080" # API exposed at port 83
+      - "5008:5005" # gRPC exposed at port 50
     networks:
       - app-network
   # 5
@@ -40,7 +40,7 @@ services:
     image: healingcommunity/notification-service:latest
     container_name: notification-service
     ports:
-      - "84:8080"  # API exposed at port 84
+      - "84:8080" # API exposed at port 84
     networks:
       - app-network
   # 6
@@ -48,7 +48,7 @@ services:
     image: healingcommunity/chat-service:latest
     container_name: chat-service
     ports:
-      - "85:8080"  # API exposed at port 85
+      - "85:8080" # API exposed at port 85
     networks:
       - app-network
   # 7
@@ -56,8 +56,8 @@ services:
     image: healingcommunity/expert-service:latest
     container_name: expert-service
     ports:
-      - "86:8080"  # API exposed at port 86
-      - "5005:5005"  # gRPC exposed at port 50
+      - "86:8080" # API exposed at port 86
+      - "5005:5005" # gRPC exposed at port 50
     networks:
       - app-network
   # 8
@@ -65,7 +65,7 @@ services:
     image: healingcommunity/detector-service:latest
     container_name: detector-service
     ports:
-      - "8087:5000"  # API exposed at port 87
+      - "8087:5000" # API exposed at port 87
       # - "50:5005"  # gRPC exposed at port 50
     networks:
       - app-network
@@ -75,7 +75,7 @@ services:
     image: healingcommunity/quiz-service:latest
     container_name: quiz-service
     ports:
-      - "88:8080"  # API exposed at port 88
+      - "88:8080" # API exposed at port 88
     networks:
       - app-network
   # 10
@@ -83,7 +83,7 @@ services:
     image: healingcommunity/report-service:latest
     container_name: report-service
     ports:
-      - "89:8080"  # API exposed at port 89
+      - "89:8080" # API exposed at port 89
     networks:
       - app-network
   # RabbitMQ
@@ -91,11 +91,10 @@ services:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
-      - "15672:15672"  # RabbitMQ exposed at port 15672
-      - "5672:5672"  # RabbitMQ exposed at port 5672
+      - "15672:15672" # RabbitMQ exposed at port 15672
+      - "5672:5672" # RabbitMQ exposed at port 5672
     networks:
       - app-network
-  
 
   kong-database:
     image: postgres:latest
@@ -149,7 +148,7 @@ services:
       - kong-database
     extra_hosts:
       - "host.docker.internal:host-gateway"
-# Initialize Kong with some services and routes
+  # Initialize Kong with some services and routes
   kong-init:
     image: curlimages/curl:latest
     command: >
@@ -187,6 +186,15 @@ services:
       "
     depends_on:
       - kong-gateway
+    networks:
+      - app-network
+
+  # create redis container
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
     networks:
       - app-network
 networks:
