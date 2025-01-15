@@ -29,7 +29,8 @@ data:
         "Password": "guest"
       },
       "GrpcSettings": {
-        "GroupServiceUrl": "http://group-service.group-service.svc.cluster.local:5005"
+        "GroupServiceUrl": "http://group-service.group-service.svc.cluster.local:5005",
+        "UserService": "http://user-service.user-service.svc.cluster.local:5005"
       },
       "FirebaseSettings": {
         "StorageBucket": "healing-community-4d0b5.appspot.com",

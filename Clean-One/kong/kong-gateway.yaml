@@ -47,7 +47,7 @@ spec:
             - name: KONG_ADMIN_LISTEN
               value: "0.0.0.0:8001, 0.0.0.0:8444 ssl"
               
-            # Đổi IP này thành IP của máy bạn hoăc IP của LoadBalancer
+            # Đổi IP này thành IP của máy bạn hoăc IP của LoadBalancer để có service trong GUI
             - name: KONG_ADMIN_GUI_URL
               value: "http://34.41.134.139:8002"
           volumeMounts:

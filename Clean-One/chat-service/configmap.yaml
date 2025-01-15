@@ -13,7 +13,7 @@ data:
       },
       "ConnectionStrings": {
         "PostgresDb": "Host=aws-0-ap-southeast-1.pooler.supabase.com; Database=postgres; Username=postgres.cggerynfjmvyretpnrzy; Password=ProjectHealing@1234",
-        "MongoDb": "mongodb+srv://nghialoe46:Abcd1234@nghialoe-cluster.ybgooth.mongodb.net/?retryWrites=true&w=majority&appName=nghiaLoe-Cluster",
+        "MongoDb": "mongodb://localhost:27017",
         "Redis": "redis-11511.c309.us-east-2-1.ec2.redns.redis-cloud.com:11511,password=GcgEaGqb0xQyUqaBUocI14XpTpzMViJO",
         "ElasticSearch": "localhost:6379"
       },
